@@ -1,6 +1,6 @@
 SCHEMA_PATH = "mail_schemes"
-CURRENT_SCHEMA = "AIESEC_1"
 SCHEMA = "AIESEC_1.eml"
+DATA = "test_data.csv"
 
 LOGIN = "leogomat@gmail.com"
 SENDER_NAME = "Leonardo"

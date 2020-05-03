@@ -15,9 +15,9 @@ def main():
 
     with smtplib.SMTP_SSL(configurations.SMTP_SERVER, configurations.PORT, context=context) as server:
         server.login(configurations.SENDER_EMAIL, password)
-        with open("data.csv") as data:
+        with open(configurations.DATA) as data:
             reader = csv.reader(data)
-            for email, name, gender in reader:
+            for gender, name, email in reader:
                 with open(os.path.join(configurations.SCHEMA_PATH, configurations.SCHEMA)) as file:
 
                     # Declare the message object and adjust the header parameters
@@ -27,7 +27,7 @@ def main():
                     
                     # Replace the personalizeable fields of the message with their values
                     for m in message.get_payload():
-                        m.set_payload(m.get_payload().format(sender=configurations.SENDER_NAME, receiver=name, greetings="a"))
+                        m.set_payload(m.get_payload().format(sender=configurations.SENDER_NAME, receiver=name, greetings=("Sehr geehrte" + ("r Herr" if gender=="Herr" else " Frau"))))
 
                     # Send message
                     server.send_message(message)
